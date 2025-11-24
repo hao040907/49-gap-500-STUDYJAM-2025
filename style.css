@@ -1,0 +1,190 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* --- HEADER STYLES --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    height: 50px; /* Điều chỉnh chiều cao logo cho vừa mắt */
+    width: auto;
+}
+
+.nav-tabs {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.tab-item {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    padding-bottom: 5px;
+    color: #5f6368;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.tab-item:hover {
+    color: #0f254e; /* Màu xanh đậm từ logo */
+}
+
+/* Trạng thái đang chọn (Active) */
+.tab-item.active {
+    color: #e65125; /* Màu cam từ logo */
+    border-bottom: 3px solid #e65125;
+}
+
+/* --- MAIN CONTENT STYLES --- */
+main {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Ẩn tất cả các tab content mặc định */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s;
+}
+
+/* Chỉ hiện tab có class active */
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- HOME PAGE STYLES --- */
+.title {
+    font-size: 2.5rem;
+    color: #0f254e;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: #555;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.team-image-container {
+    margin: 0 auto 30px;
+    max-width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.team-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.team-info {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid #e65125;
+    display: inline-block;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.team-name, .team-slogan {
+    font-size: 1.2rem;
+    margin: 5px 0;
+}
+
+/* --- PLACEHOLDER STYLES (Cho trang About & Contact) --- */
+.placeholder-box {
+    border: 2px dashed #ccc;
+    padding: 50px;
+    border-radius: 10px;
+    background-color: #eee;
+    color: #777;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .title { font-size: 1.8rem; }
+}
+
+/* --- SLIDER STYLES (Mới thêm) --- */
+.slider-container {
+    overflow: hidden; /* Ẩn các ảnh nằm ngoài khung */
+    position: relative;
+    cursor: grab; /* Con trỏ hình bàn tay để báo hiệu có thể kéo */
+    touch-action: pan-y; /* Tối ưu cho thao tác vuốt trên mobile */
+}
+
+.slider-container:active {
+    cursor: grabbing; /* Con trỏ nắm chặt khi đang kéo */
+}
+
+.slider-track {
+    display: flex; /* Xếp các ảnh thành hàng ngang */
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease-out; /* Hiệu ứng trượt mượt mà */
+}
+
+.slide {
+    min-width: 100%; /* Mỗi slide chiếm trọn chiều rộng container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide img {
+    width: 100%;
+    height: 450px;
+    display: block;
+    pointer-events: none; /* Quan trọng: Ngăn trình duyệt kéo file ảnh đi thay vì trượt slider */
+    user-select: none;
+    background-size: contain;
+}
+
+/* --- HIỆU ỨNG BLUR KHI CHUYỂN --- */
+
+/* Mặc định ảnh sẽ có transition cho thuộc tính filter để mờ dần đều */
+.slider-track img {
+    transition: filter 0.3s ease-out;
+    filter: blur(0);
+}
+
+/* Khi thanh trượt đang chạy (có class blurring), ảnh sẽ bị mờ */
+.slider-track.bluring img {
+    filter: blur(5px); /* Bạn có thể chỉnh số 5px lên 10px nếu muốn mờ hơn */
+}
