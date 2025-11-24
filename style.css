@@ -140,3 +140,51 @@ main {
     
     .title { font-size: 1.8rem; }
 }
+
+/* --- SLIDER STYLES (Mới thêm) --- */
+.slider-container {
+    overflow: hidden; /* Ẩn các ảnh nằm ngoài khung */
+    position: relative;
+    cursor: grab; /* Con trỏ hình bàn tay để báo hiệu có thể kéo */
+    touch-action: pan-y; /* Tối ưu cho thao tác vuốt trên mobile */
+}
+
+.slider-container:active {
+    cursor: grabbing; /* Con trỏ nắm chặt khi đang kéo */
+}
+
+.slider-track {
+    display: flex; /* Xếp các ảnh thành hàng ngang */
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease-out; /* Hiệu ứng trượt mượt mà */
+}
+
+.slide {
+    min-width: 100%; /* Mỗi slide chiếm trọn chiều rộng container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide img {
+    width: 100%;
+    height: 450px;
+    display: block;
+    pointer-events: none; /* Quan trọng: Ngăn trình duyệt kéo file ảnh đi thay vì trượt slider */
+    user-select: none;
+    background-size: contain;
+}
+
+/* --- HIỆU ỨNG BLUR KHI CHUYỂN --- */
+
+/* Mặc định ảnh sẽ có transition cho thuộc tính filter để mờ dần đều */
+.slider-track img {
+    transition: filter 0.3s ease-out;
+    filter: blur(0);
+}
+
+/* Khi thanh trượt đang chạy (có class blurring), ảnh sẽ bị mờ */
+.slider-track.bluring img {
+    filter: blur(5px); /* Bạn có thể chỉnh số 5px lên 10px nếu muốn mờ hơn */
+}
